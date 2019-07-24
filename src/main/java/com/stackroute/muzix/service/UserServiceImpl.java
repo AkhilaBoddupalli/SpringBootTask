@@ -26,7 +26,7 @@ public UserServiceImpl(UserRepository userRepository)
 
     if(userRepository.existsById(user.getId()))
     {
-        throw new UserAlreadyExistsException("User already exists");
+        throw new UserAlreadyExistsException("user already exists");
     }
         User savedUser=userRepository.save(user);
     if(savedUser==null)
