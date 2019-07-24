@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,13 +20,15 @@ public UserServiceImpl(UserRepository userRepository)
     this.userRepository=userRepository;
 }
     @Override
+
     public User saveUser(User user) throws UserAlreadyExistsException {
 
-    User savedUser=userRepository.save(user);
+
     if(userRepository.existsById(user.getId()))
     {
         throw new UserAlreadyExistsException("User already exists");
     }
+        User savedUser=userRepository.save(user);
     if(savedUser==null)
     {
         throw new UserAlreadyExistsException("user alraedy exists");
@@ -35,16 +38,34 @@ public UserServiceImpl(UserRepository userRepository)
 
     @Override
     public List<User> getAllUsers() {
-   
+
         return userRepository.findAll();
     }
 
     @Override
-    public void deleteUser(int id)
+    public boolean deleteUser(int id) throws UserNotFoundException
     {
+        //userRepository.deleteById(id);
+        Optional<User> user1 = userRepository.findById(id);
 
-        userRepository.deleteById(id);
+        if(!user1.isPresent())
+        {
+            throw new UserNotFoundException("User Not Found");
+        }
+
+        try {
+
+            userRepository.delete(user1.get());
+
+            return true;
+
+        }
+        catch (Exception exception)
+        {
+            return false;
+        }
     }
+
 
     @Override
     public List<User> getUserByName(String firstName) throws UserNotFoundException {

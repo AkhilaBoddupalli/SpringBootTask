@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@ControllerAdvice(basePackages="com.stackroute.muzix")
 public class UserController {
     UserService userService;
 
@@ -25,7 +26,9 @@ public class UserController {
     }
 
     @PostMapping("user")
-    public ResponseEntity<?> saveuser(@RequestBody User user){
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<?> saveuser(@RequestBody User user)
+    {
         ResponseEntity responseEntity;
         try
         {
@@ -75,6 +78,7 @@ public class UserController {
         return responseEntity;
     }
     @GetMapping("user/{firstName}")
+    @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<?> getTrackbyName(@PathVariable String firstName) {
 
         ResponseEntity responseEntity;
