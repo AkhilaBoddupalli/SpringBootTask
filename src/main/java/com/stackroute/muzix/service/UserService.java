@@ -8,7 +8,7 @@ public interface UserService {
     public User saveUser(User user);
     public List<User> getAllUsers();
     public void deleteUser(int id);
-    public User getUserById(int userid);
+    public List<User> getUserByName(String firstName);
     public User updateUser(int id,User user);
 
 }

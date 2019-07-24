@@ -72,6 +72,22 @@ public class UserController {
         }
         return responseEntity;
     }
+    @GetMapping("user/{firstName}")
+    public ResponseEntity<?> getTrackbyName(@PathVariable String firstName) {
+
+        ResponseEntity responseEntity;
+
+        try {
+            responseEntity = new ResponseEntity<List<User>>(userService.getUserByName(firstName), HttpStatus.CREATED);
+
+
+        } catch (Exception e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+
+        }
+        return responseEntity;
+
+    }
     }
 
 
