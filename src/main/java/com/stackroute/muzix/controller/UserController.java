@@ -1,5 +1,7 @@
 package com.stackroute.muzix.controller;
 
+import com.stackroute.muzix.exceptions.UserAlreadyExistsException;
+import com.stackroute.muzix.exceptions.UserNotFoundException;
 import com.stackroute.muzix.model.User;
 import com.stackroute.muzix.service.UserService;
 import com.stackroute.muzix.service.UserServiceImpl;
@@ -30,7 +32,7 @@ public class UserController {
             userService.saveUser(user);
             responseEntity=new ResponseEntity<String>("successfully created",HttpStatus.CREATED);
         }
-        catch(Exception ex)
+        catch(UserAlreadyExistsException ex)
         {
             responseEntity=new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
         }
@@ -81,7 +83,7 @@ public class UserController {
             responseEntity = new ResponseEntity<List<User>>(userService.getUserByName(firstName), HttpStatus.CREATED);
 
 
-        } catch (Exception e) {
+        } catch (UserNotFoundException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
 
         }
