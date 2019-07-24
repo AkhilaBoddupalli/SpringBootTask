@@ -21,15 +21,15 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors
                         .basePackage("com.stackroute.muzix.controller"))
                 .paths(PathSelectors.regex("/.*"))
-                .build(); //.apiInfo(apiEndPointsInfo());
+                .build().apiInfo(apiEndPointsInfo());
     }
-//    private ApiInfo apiEndPointsInfo() {
-//        return new ApiInfoBuilder().title("Muzix REST API")
-//                .description("")
-//                //.contact(new Contact("Ramesh Fadatare", "www.javaguides.net", "ramesh24fadatare@gmail.com"))
-//                .license("Apache 2.0")
-//                .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
-//                .version("1.0.0")
-//                .build();
-//    }
+    private ApiInfo apiEndPointsInfo() {
+        return new ApiInfoBuilder().title("Muzix REST API")
+                .description("")
+                //.contact(new Contact("Ramesh Fadatare", "www.javaguides.net", "ramesh24fadatare@gmail.com"))
+                .license("Apache 2.0")
+                .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
+                .version("1.0.0")
+                .build();
+    }
 }
