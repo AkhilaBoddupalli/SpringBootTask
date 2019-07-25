@@ -6,6 +6,7 @@ import com.stackroute.muzix.model.User;
 import com.stackroute.muzix.service.UserService;
 import com.stackroute.muzix.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,10 @@ import java.util.List;
 @RequestMapping("/api/v1")
 @ControllerAdvice(basePackages="com.stackroute.muzix")
 public class UserController {
+
     UserService userService;
+    @Value("${successmessage}")
+    String successmsg;
 
 
     public UserController(UserService userService)
@@ -33,7 +37,7 @@ public class UserController {
         try
         {
             userService.saveUser(user);
-            responseEntity=new ResponseEntity<String>("successfully created",HttpStatus.CREATED);
+            responseEntity=new ResponseEntity<String>(successmsg,HttpStatus.CREATED);
         }
         catch(UserAlreadyExistsException ex)
         {
