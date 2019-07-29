@@ -67,16 +67,16 @@ public UserServiceImpl(UserRepository userRepository)
     }
 
 
-    @Override
-    public List<User> getUserByName(String firstName) throws UserNotFoundException {
-    List<User> user=userRepository.getUserByName(firstName);
-    if(user.isEmpty())
-    {
-        throw new UserNotFoundException("User not found");
-    }
-
-        return userRepository.getUserByName(firstName);
-    }
+//    @Override
+//    public List<User> getUserByName(String firstName) throws UserNotFoundException {
+//    List<User> user=userRepository.getUserByName(firstName);
+//    if(user.isEmpty())
+//    {
+//        throw new UserNotFoundException("User not found");
+//    }
+//
+//        return userRepository.getUserByName(firstName);
+//    }
 
 
     @Override

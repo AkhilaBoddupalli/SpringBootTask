@@ -81,23 +81,23 @@ public class UserController {
         }
         return responseEntity;
     }
-    @GetMapping("user/{firstName}")
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<?> getTrackbyName(@PathVariable String firstName) {
-
-        ResponseEntity responseEntity;
-
-        try {
-            responseEntity = new ResponseEntity<List<User>>(userService.getUserByName(firstName), HttpStatus.CREATED);
-
-
-        } catch (UserNotFoundException e) {
-            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
-
-        }
-        return responseEntity;
-
-    }
+//    @GetMapping("user/{firstName}")
+//    @ExceptionHandler(UserNotFoundException.class)
+//    public ResponseEntity<?> getTrackbyName(@PathVariable String firstName) {
+//
+//        ResponseEntity responseEntity;
+//
+//        try {
+//            responseEntity = new ResponseEntity<List<User>>(userService.getUserByName(firstName), HttpStatus.CREATED);
+//
+//
+//        } catch (UserNotFoundException e) {
+//            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+//
+//        }
+//        return responseEntity;
+//
+//    }
     }
 
 
