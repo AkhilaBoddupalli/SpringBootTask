@@ -3,7 +3,7 @@ package com.stackroute.muzix.config;
 import com.stackroute.muzix.exceptions.UserAlreadyExistsException;
 import com.stackroute.muzix.model.User;
 import com.stackroute.muzix.service.UserService;
-import org.h2.server.web.WebServlet;
+//import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -23,13 +23,13 @@ public class WebConfiguration {
 
 
 
-    @Bean
-    ServletRegistrationBean h2servletRegistration()
-    {
-        ServletRegistrationBean registrationBean=new ServletRegistrationBean(new WebServlet());
-        registrationBean.addUrlMappings("/console/*");
-        return registrationBean;
-    }
+//    @Bean
+//    ServletRegistrationBean h2servletRegistration()
+//    {
+//        ServletRegistrationBean registrationBean=new ServletRegistrationBean(new WebServlet());
+//        registrationBean.addUrlMappings("/console/*");
+//        return registrationBean;
+//    }
 
 
 }
