@@ -1,0 +1,9 @@
+FROM java:8-jre
+WORKDIR src
+ENV MYSQL_DATABASE=employeedb
+ENV MYSQL_USER=root
+ENV MYSQL_PASSWORD=Root@123
+ENV MYSQLCI_URL=jdbc://mysql://localhost:3306/employeedb
+ADD ./target/muzix-0.0.1-SNAPSHOT.jar /src/muzix-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
+ENTRYPOINT ["java",".jar","/src/muzix-0.0.1-SNAPSHOT.jar"]
