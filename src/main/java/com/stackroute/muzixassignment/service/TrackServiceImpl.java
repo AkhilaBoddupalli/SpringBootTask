@@ -40,8 +40,9 @@ public class TrackServiceImpl implements TrackService {
 
 
     @Override
-    public List<Track> getAllTrack() {
-        return trackRepository.findAll();
+    public List<Track> getAllTrack()
+    {
+        return (List<Track>) trackRepository.findAll();
     }
 
     @Override
@@ -79,27 +80,33 @@ public class TrackServiceImpl implements TrackService {
         return updateTrack;
     }
 
-    @Override
-    public void fetchData() {
-        String url="http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=3cc8ac30b3db666f9d334cd898067c20&format=json";
+    public void fetchData()
+    {
+        final String uri = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=cher&api_key=3cc8ac30b3db666f9d334cd898067c20&format=json";
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> result = restTemplate.getForEntity(url, String.class);
+        ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = null;
 
+        //Object Mapper to access the JSON from the response entity
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = null;
+
+        //read the response body to get JSON object
         try {
-            jsonNode =   objectMapper.readTree(result.getBody());
-            ArrayNode arrayNode = (ArrayNode) jsonNode.path("toptracks").path("tracks");
+            root = mapper.readTree(result.getBody());
+            ArrayNode arrayNode = (ArrayNode) root.path("tracks").path("track");
 
-            for(int i=0; i<arrayNode.size();i++)
-            {
+            //iterate the JSON array
+            for (int i = 0; i < arrayNode.size(); i++) {
+                //get a new Track object and fill it with data using setters
                 Track track = new Track();
-                track.setId(i);
                 track.setName(arrayNode.get(i).path("name").asText());
-                track.setComments((arrayNode.get(i+9).path("comments").asText()));
+                track.setComments(arrayNode.get(i).path("artist").path("name").asText());
+                //save the track to database
                 trackRepository.save(track);
             }
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
