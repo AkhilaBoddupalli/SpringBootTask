@@ -1,1 +1,1 @@
-1. Complete all the endpoints for CRUD operations on Muzix
+7.Global exception using Controller advice
