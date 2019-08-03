@@ -5,7 +5,7 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component // marks a java class as a bean so the component-scanning mechanism of spring can pick it up and pull it into the application context
 public class WebConfiguration {
     @Bean
     ServletRegistrationBean h2servletRegistration()

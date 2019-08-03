@@ -9,11 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-@Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Entity //marks class to a table
+@Data //
+@NoArgsConstructor //generates constructor with no arguments
+@AllArgsConstructor //generates constructor with all arguments
+@Builder //produces complex builder APIs for your classes.
 public class User {
     @Id
     //@GeneratedValue(strategy = GenerationType.AUTO)
