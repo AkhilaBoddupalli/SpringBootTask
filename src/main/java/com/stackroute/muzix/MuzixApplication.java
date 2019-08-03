@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-@SpringBootApplication
+@SpringBootApplication // annotation is used to mark a configuration class that declares one or more
+// @Bean methods and also triggers auto-configuration and component scanning
 
 public class MuzixApplication
 {
