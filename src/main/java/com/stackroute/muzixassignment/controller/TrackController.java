@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/v1")
+@RestController //creates restful API
+@RequestMapping("/api/v1") //maps HTTP requests with the corresponding URI
 @ControllerAdvice(basePackages="com.stackroute.muzixassignment")
 public class TrackController {
 
@@ -26,7 +26,7 @@ public class TrackController {
         this.trackService=trackService;
     }
 
-    @PostMapping("track")
+    @PostMapping("track") ////handle the HTTP POST requests matched with given URI expression
     @ExceptionHandler(TrackAlreadyExistsException.class)
     public ResponseEntity<?> saveTrack(@RequestBody Track track)
     {
@@ -43,12 +43,12 @@ public class TrackController {
         return responseEntity;
     }
 
-    @GetMapping("track")
+    @GetMapping("track") ////handle the HTTP GET requests matched with given URI expression
     public ResponseEntity<?> getAllTrack(){
         trackService.fetchData();
         return new ResponseEntity<List<Track>>(trackService.getAllTrack(),HttpStatus.OK);
     }
-    @DeleteMapping("/track/{id}")
+    @DeleteMapping("/track/{id}") ////handle the HTTP DELETE requests matched with given URI expression
     public ResponseEntity<?> deleteTrack(@PathVariable int id){
         ResponseEntity responseEntity;
         try
@@ -64,7 +64,7 @@ public class TrackController {
     }
 
 
-    @PutMapping("/track/{id}")
+    @PutMapping("/track/{id}") //handle the HTTP PUT requests matched with given URI expression
     public ResponseEntity<?> updateTrack(@PathVariable int id,@RequestBody Track track)
     {
         ResponseEntity responseEntity;
@@ -79,7 +79,7 @@ public class TrackController {
         }
         return responseEntity;
     }
-    @GetMapping("track/{firstName}")
+    @GetMapping("track/{firstName}") ////handle the HTTP GET requests matched with given URI expression
     @ExceptionHandler(TrackNotFoundException.class)
     public ResponseEntity<?> getTrackByName(@PathVariable String firstName) {
 

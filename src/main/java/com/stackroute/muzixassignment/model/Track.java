@@ -4,9 +4,9 @@ import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 
-@Entity
+@Entity //class that can be mapped to a table
 public class Track {
-    @Id
+    @Id //marks the feild as primary key
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     @Column

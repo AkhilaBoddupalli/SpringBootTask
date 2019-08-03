@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-@Configuration
+@Configuration //indicates that a class is a configuration class that may contain bean definitions.
 public class WebConfiguration {
 
     TrackService trackService;
