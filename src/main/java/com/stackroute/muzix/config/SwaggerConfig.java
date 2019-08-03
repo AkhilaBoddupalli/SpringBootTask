@@ -12,10 +12,10 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-@Configuration
-@EnableSwagger2
+@Configuration //indicates that a class is a configuration class that may contain bean definitions.
+@EnableSwagger2 //is used to enable the Swagger2 for your Spring Boot application.
 public class SwaggerConfig {
-    @Bean
+    @Bean // indicates that a method produces a bean to be managed by Spring.
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).select()
                 .apis(RequestHandlerSelectors

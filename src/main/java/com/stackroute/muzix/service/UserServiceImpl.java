@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service //marks class as a service
 public class UserServiceImpl implements UserService {
 UserRepository userRepository;
 @Autowired
