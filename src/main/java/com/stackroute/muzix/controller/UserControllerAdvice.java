@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.Optional;
 
-@ControllerAdvice(basePackages = "com.stackroute.muzixapp")
+@ControllerAdvice(basePackages = "com.stackroute.muzixapp") //handles exceptions
 public class UserControllerAdvice {
 
     private ResponseEntity<VndErrors> error(final Exception exception, final HttpStatus httpStatus, final String logRef)

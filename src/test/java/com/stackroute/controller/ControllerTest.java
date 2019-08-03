@@ -31,15 +31,17 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-    @WebMvcTest
-    @ContextConfiguration(classes = MuzixApplication.class)
+@RunWith(SpringRunner.class) //invoke the class it references to run the tests
+// in that class instead of the runner built into JUnit.
+    @WebMvcTest  //annotation is used for Spring MVC tests. It disables
+        //full auto-configuration and instead apply only configuration relevant to MVC tests.
+    @ContextConfiguration(classes = MuzixApplication.class) //loads an application context for spring integration test
     public class ControllerTest {
 
         @Autowired
         private MockMvc mockMvc;
         private User user;
-        @MockBean
+
         private UserService userService;
         @InjectMocks
         private UserController userController;

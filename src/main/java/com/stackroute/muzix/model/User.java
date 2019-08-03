@@ -4,9 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-@Entity
+@Entity //defines a class that can be mappped to a table
 public class User {
-    @Id
+    @Id //marks the feild as primary key
     private int id;
     private String firstName;
     private String lastName;

@@ -28,11 +28,11 @@ public class UserServiceTest {
     User user;
 
     //Create a mock for UserRepository
-    @Mock
+    @Mock //@Mock annotation is used to create and inject mocked instances
     UserRepository userRepository;
 
     //Inject the mocks as dependencies into UserServiceImpl
-    @InjectMocks
+    @InjectMocks //@InjectMocks marks a field on which injection should be performed.
     UserServiceImpl userService;
     List<User> list= null;
 

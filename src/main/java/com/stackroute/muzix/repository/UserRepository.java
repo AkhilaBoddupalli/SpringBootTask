@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
-@Repository
+@Repository //indicates that annotated class is a repository
 public interface UserRepository extends JpaRepository<User,Integer> {
 
 

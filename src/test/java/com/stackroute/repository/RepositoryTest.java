@@ -17,7 +17,7 @@ import javax.sound.midi.Track;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@DataJpaTest
+@DataJpaTest //to test spring data jpa repositories
 @ContextConfiguration(classes = MuzixApplication.class)
 public class RepositoryTest {
     @Autowired

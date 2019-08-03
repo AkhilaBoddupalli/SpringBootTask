@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/v1")
-@ControllerAdvice(basePackages="com.stackroute.muzix")
+@RestController //used to create restful webservices
+@RequestMapping("/api/v1") //maps HTTP requests to handler methods
+@ControllerAdvice(basePackages="com.stackroute.muzix") //handle exceptions
 public class UserController {
 
     UserService userService;
@@ -29,8 +29,8 @@ public class UserController {
         this.userService=userService;
     }
 
-    @PostMapping("user")
-    @ExceptionHandler(UserAlreadyExistsException.class)
+    @PostMapping("user") //maps HTTP requests onto specific handlers
+    @ExceptionHandler(UserAlreadyExistsException.class) //for handling exceptions
     public ResponseEntity<?> saveuser(@RequestBody User user)
     {
         ResponseEntity responseEntity;
@@ -46,11 +46,11 @@ public class UserController {
         return responseEntity;
     }
 
-    @GetMapping("user")
+    @GetMapping("user") //msps HTTP get requests
     public ResponseEntity<?> getAllUser(){
         return new ResponseEntity<List<User>>(userService.getAllUsers(),HttpStatus.OK);
     }
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/user/{id}") //handle delete requests
     public ResponseEntity<?> deleteUser(@PathVariable int id){
         ResponseEntity responseEntity;
         try
@@ -66,7 +66,7 @@ public class UserController {
         }
 
 
-    @PutMapping("/user/{id}")
+    @PutMapping("/user/{id}") //handle put requests
     public ResponseEntity<?> updateUser(@PathVariable int id,@RequestBody User user)
     {
         ResponseEntity responseEntity;
