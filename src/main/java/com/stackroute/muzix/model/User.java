@@ -4,9 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-@Entity
+@Entity //marks class to a table
 public class User {
-    @Id
+    @Id //marks field as primarykey
     //@GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String firstName;
