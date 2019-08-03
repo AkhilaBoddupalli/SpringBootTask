@@ -1,1 +1,3 @@
-1. Complete all the endpoints for CRUD operations on Muzix
+
+
+CommandLineRunner (Find out how it differs from ApplicationRunner)
