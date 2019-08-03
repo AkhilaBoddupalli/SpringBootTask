@@ -11,7 +11,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component // marks a java class as a bean so the component-scanning mechanism of spring can pick it up and pull it into the application context
 public class WebConfiguration {
     private final
     UserService userService;
@@ -23,7 +23,7 @@ public class WebConfiguration {
 
 
 
-    @Bean
+    @Bean // indicates that a method produces a bean to be managed by Spring.
     ServletRegistrationBean h2servletRegistration()
     {
         ServletRegistrationBean registrationBean=new ServletRegistrationBean(new WebServlet());

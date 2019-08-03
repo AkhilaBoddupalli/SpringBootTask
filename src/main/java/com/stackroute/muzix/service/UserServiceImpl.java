@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service //marks class as a service
 public class UserServiceImpl implements UserService {
 UserRepository userRepository;
 @Autowired
