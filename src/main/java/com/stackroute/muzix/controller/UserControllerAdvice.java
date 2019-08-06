@@ -17,7 +17,7 @@ public class UserControllerAdvice {
     private ResponseEntity<VndErrors> error(final Exception exception, final HttpStatus httpStatus, final String logRef)
     {
         final String message = Optional.of(exception.getMessage()).orElse(exception.getClass().getSimpleName());
-        return new ResponseEntity<>(new VndErrors(logRef, message), httpStatus);
+        return new ResponseEntity<>(new VndErrors(logRef, message), httpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
@@ -28,6 +28,6 @@ public class UserControllerAdvice {
 
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity <VndErrors> alreadyExistsException(final UserAlreadyExistsException e) {
-        return error(e, HttpStatus.CONFLICT, e.getLocalizedMessage());
+        return error(e, HttpStatus.NOT_FOUND, e.getLocalizedMessage());
     }
 }
