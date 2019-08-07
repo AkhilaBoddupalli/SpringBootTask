@@ -13,12 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Service //marks the class as service
 public class TrackServiceImpl implements TrackService {
-    TrackRepository trackRepository;
+    private TrackRepository trackRepository;
 
     @Autowired
     public TrackServiceImpl(TrackRepository trackRepository) {
@@ -26,16 +25,16 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public void saveTrack(Track track) throws TrackAlreadyExistsException {
+    public Track saveTrack(Track track) throws TrackAlreadyExistsException {
         if (trackRepository.existsById(track.getId())) {
-            throw new TrackAlreadyExistsException("user already exists");
+            throw new TrackAlreadyExistsException("track already exists");
         }
         Track savedTrack = trackRepository.save(track);
         if (savedTrack == null) {
-            throw new TrackAlreadyExistsException("user alraedy exists");
+            throw new TrackAlreadyExistsException("track not found");
         }
 
-
+    return savedTrack;
     }
 
 
@@ -46,22 +45,16 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public boolean deleteTrack(int id) throws TrackNotFoundException {
+    public Optional<Track> deleteTrack(int id) throws TrackNotFoundException {
         Optional<Track> track1 = trackRepository.findById(id);
 
         if (!track1.isPresent()) {
             throw new TrackNotFoundException("User Not Found");
         }
 
-        try {
+         trackRepository.deleteById(id);
+        return track1;
 
-            trackRepository.delete(track1.get());
-
-            return true;
-
-        } catch (Exception exception) {
-            return false;
-        }
     }
 
     @Override
@@ -80,7 +73,7 @@ public class TrackServiceImpl implements TrackService {
         return updateTrack;
     }
 
-    public void fetchData()
+    public Track fetchData()
     {
         final String uri = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=cher&api_key=3cc8ac30b3db666f9d334cd898067c20&format=json";
         RestTemplate restTemplate = new RestTemplate();
@@ -90,6 +83,7 @@ public class TrackServiceImpl implements TrackService {
         //Object Mapper to access the JSON from the response entity
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = null;
+        Track track = new Track();
 
         //read the response body to get JSON object
         try {
@@ -99,7 +93,7 @@ public class TrackServiceImpl implements TrackService {
             //iterate the JSON array
             for (int i = 0; i < arrayNode.size(); i++) {
                 //get a new Track object and fill it with data using setters
-                Track track = new Track();
+
                 track.setName(arrayNode.get(i).path("name").asText());
                 track.setComments(arrayNode.get(i).path("artist").path("name").asText());
                 //save the track to database
@@ -111,6 +105,7 @@ public class TrackServiceImpl implements TrackService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return track;
 
     }
 }

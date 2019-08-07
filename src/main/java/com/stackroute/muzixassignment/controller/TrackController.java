@@ -19,6 +19,7 @@ import java.util.List;
 public class TrackController {
 
     TrackService trackService;
+    ResponseEntity responseEntity;
 
 
     public TrackController(TrackService trackService)
@@ -30,7 +31,7 @@ public class TrackController {
     @ExceptionHandler(TrackAlreadyExistsException.class)
     public ResponseEntity<?> saveTrack(@RequestBody Track track)
     {
-        ResponseEntity responseEntity;
+//        ResponseEntity responseEntity;
         try
         {
             trackService.saveTrack(track);
@@ -38,7 +39,7 @@ public class TrackController {
         }
         catch(TrackAlreadyExistsException ex)
         {
-            responseEntity=new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
+            responseEntity=new ResponseEntity<String>(ex.getMessage(),HttpStatus.NOT_FOUND);
         }
         return responseEntity;
     }
@@ -50,11 +51,11 @@ public class TrackController {
     }
     @DeleteMapping("/track/{id}") ////handle the HTTP DELETE requests matched with given URI expression
     public ResponseEntity<?> deleteTrack(@PathVariable int id){
-        ResponseEntity responseEntity;
+//        ResponseEntity responseEntity;
         try
         {
-            trackService.deleteTrack(id);
-            responseEntity=new ResponseEntity("successfully deleted",HttpStatus.OK);
+            //trackService.deleteTrack(id);
+            responseEntity=new ResponseEntity<>(trackService.deleteTrack(id),HttpStatus.OK);
         }
         catch(Exception ex)
         {
@@ -67,7 +68,7 @@ public class TrackController {
     @PutMapping("/track/{id}") //handle the HTTP PUT requests matched with given URI expression
     public ResponseEntity<?> updateTrack(@PathVariable int id,@RequestBody Track track)
     {
-        ResponseEntity responseEntity;
+//        ResponseEntity responseEntity;
         try
         {
             trackService.updateTrack(id,track);
@@ -83,14 +84,14 @@ public class TrackController {
     @ExceptionHandler(TrackNotFoundException.class)
     public ResponseEntity<?> getTrackByName(@PathVariable String firstName) {
 
-        ResponseEntity responseEntity;
+//        ResponseEntity responseEntity;
 
         try {
             responseEntity = new ResponseEntity<List<Track>>(trackService.getTrackByName(firstName), HttpStatus.CREATED);
 
 
         } catch (TrackNotFoundException e) {
-            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 
         }
         return responseEntity;
