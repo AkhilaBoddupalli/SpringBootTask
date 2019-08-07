@@ -1,1 +1,1 @@
-1. Complete all the endpoints for CRUD operations on Muzix
+Implement the muzix with mockito testcases
